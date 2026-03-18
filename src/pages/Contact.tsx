@@ -73,33 +73,34 @@ export const Contact = () => {
         </div>
 
         {/* Lead Gen Form */}
-        <GlassCard delay={0.4} className="relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-neon-blue/10 blur-[100px] rounded-full -mr-20 -mt-20 pointer-events-none" />
+        <GlassCard delay={0.4} className="relative overflow-hidden p-8 md:p-12">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-neon-blue/10 blur-[120px] rounded-full -mr-20 -mt-20 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-neon-purple/10 blur-[120px] rounded-full -ml-20 -mb-20 pointer-events-none" />
           
-          <form className="relative z-10 space-y-6" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">{t('contact.form.name')}</label>
+          <form className="relative z-10 space-y-8" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.name')}</label>
                 <input 
                   type="text" 
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-neon-blue transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue focus:bg-white/10 transition-all shadow-inner"
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">{t('contact.form.phone')}</label>
+              <div className="space-y-3">
+                <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.phone')}</label>
                 <input 
                   type="tel" 
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-neon-blue transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue focus:bg-white/10 transition-all shadow-inner"
                   required
                   dir="ltr"
                 />
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">{t('contact.form.service')}</label>
-              <select className="w-full bg-brand-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-neon-blue transition-colors appearance-none">
+            <div className="space-y-3">
+              <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.service')}</label>
+              <select className="w-full bg-brand-navy border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue transition-all appearance-none shadow-inner cursor-pointer">
                 <option value="meta">{t('contact.form.services.meta')}</option>
                 <option value="google">{t('contact.form.services.google')}</option>
                 <option value="tiktok">{t('contact.form.services.tiktok')}</option>
@@ -107,9 +108,9 @@ export const Contact = () => {
               </select>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">{t('contact.form.budget')}</label>
-              <select className="w-full bg-brand-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-neon-blue transition-colors appearance-none">
+            <div className="space-y-3">
+              <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.budget')}</label>
+              <select className="w-full bg-brand-navy border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue transition-all appearance-none shadow-inner cursor-pointer">
                 <option value="b1">{t('contact.form.budgets.b1')}</option>
                 <option value="b2">{t('contact.form.budgets.b2')}</option>
                 <option value="b3">{t('contact.form.budgets.b3')}</option>
@@ -117,19 +118,19 @@ export const Contact = () => {
               </select>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">{t('contact.form.message')}</label>
+            <div className="space-y-3">
+              <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.message')}</label>
               <textarea 
                 rows={4}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-neon-blue transition-colors resize-none"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue focus:bg-white/10 transition-all resize-none shadow-inner"
               />
             </div>
 
-            <Button variant="primary" size="lg" className="w-full py-4 text-lg">
+            <Button variant="primary" size="lg" className="w-full py-5 text-lg font-bold tracking-wide">
               {t('contact.form.submit')}
             </Button>
 
-            <p className="text-xs text-brand-neon-purple/80 text-center mt-4 bg-brand-neon-purple/10 p-3 rounded-lg border border-brand-neon-purple/20">
+            <p className="text-sm text-brand-neon-purple/90 text-center mt-6 bg-brand-neon-purple/10 p-4 rounded-xl border border-brand-neon-purple/20 backdrop-blur-sm">
               {t('contact.form.notice')}
             </p>
           </form>

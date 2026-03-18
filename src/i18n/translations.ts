@@ -60,8 +60,8 @@ export const translations = {
       },
       parentCompany: {
         title: 'خدمات الشركة الأم',
-        desc: 'يتم تقديم خدمات صناعة المحتوى وتطوير الويب من خلال شركتنا الأم، Smart Marketer.',
-        link: 'زيارة Smart Marketer',
+        desc: 'يتم تقديم خدمات صناعة المحتوى وتطوير الويب من خلال شركتنا الأم، iVISION Agency.',
+        link: 'زيارة iVISION Agency',
       },
     },
     portfolio: {
@@ -120,7 +120,7 @@ export const translations = {
         budget: 'الميزانية الشهرية المتوقعة',
         message: 'رسالة (اختياري)',
         submit: 'إرسال الطلب',
-        notice: 'ملاحظة: سيتم توجيه طلبات صناعة المحتوى وتطوير الويب إلى الشركة الأم Smart Marketer.',
+        notice: 'ملاحظة: سيتم توجيه طلبات صناعة المحتوى وتطوير الويب إلى الشركة الأم iVISION Agency.',
         services: {
           meta: 'إعلانات ميتا',
           google: 'إعلانات جوجل',
@@ -137,7 +137,7 @@ export const translations = {
     },
     footer: {
       desc: 'وكالة تسويق رقمي متخصصة في الحملات الإعلانية المدفوعة لزيادة مبيعاتك وعائد الاستثمار.',
-      parentLink: 'جزء من Smart Marketer',
+      parentLink: 'جزء من iVISION Agency',
       copyright: '© 2026 iVision Ads. جميع الحقوق محفوظة.',
       privacy: 'سياسة الخصوصية',
       terms: 'الشروط والأحكام',
@@ -204,8 +204,8 @@ export const translations = {
       },
       parentCompany: {
         title: 'Parent Company Services',
-        desc: 'Content Creation and Web Development services are provided by our parent company, Smart Marketer.',
-        link: 'Visit Smart Marketer',
+        desc: 'Content Creation and Web Development services are provided by our parent company, iVISION Agency.',
+        link: 'Visit iVISION Agency',
       },
     },
     portfolio: {
@@ -264,7 +264,7 @@ export const translations = {
         budget: 'Expected Monthly Budget',
         message: 'Message (Optional)',
         submit: 'Submit Request',
-        notice: 'Note: Content Creation and Web Development requests will be redirected to our parent company, Smart Marketer.',
+        notice: 'Note: Content Creation and Web Development requests will be redirected to our parent company, iVISION Agency.',
         services: {
           meta: 'Meta Ads',
           google: 'Google Ads',
@@ -281,7 +281,7 @@ export const translations = {
     },
     footer: {
       desc: 'A digital marketing agency specializing in paid advertising campaigns to increase your sales and ROI.',
-      parentLink: 'Part of Smart Marketer',
+      parentLink: 'Part of iVISION Agency',
       copyright: '© 2026 iVision Ads. All rights reserved.',
       privacy: 'Privacy Policy',
       terms: 'Terms & Conditions',
@@ -348,8 +348,8 @@ export const translations = {
       },
       parentCompany: {
         title: 'Services de la Société Mère',
-        desc: 'Les services de création de contenu et de développement web sont fournis par notre société mère, Smart Marketer.',
-        link: 'Visiter Smart Marketer',
+        desc: 'Les services de création de contenu et de développement web sont fournis par notre société mère, iVISION Agency.',
+        link: 'Visiter iVISION Agency',
       },
     },
     portfolio: {
@@ -408,7 +408,7 @@ export const translations = {
         budget: 'Budget Mensuel Prévu',
         message: 'Message (Optionnel)',
         submit: 'Soumettre la Demande',
-        notice: 'Remarque : Les demandes de création de contenu et de développement web seront redirigées vers notre société mère, Smart Marketer.',
+        notice: 'Remarque : Les demandes de création de contenu et de développement web seront redirigées vers notre société mère, iVISION Agency.',
         services: {
           meta: 'Publicités Meta',
           google: 'Publicités Google',
@@ -425,7 +425,7 @@ export const translations = {
     },
     footer: {
       desc: 'Une agence de marketing digital spécialisée dans les campagnes publicitaires payantes pour augmenter vos ventes et votre ROI.',
-      parentLink: 'Fait partie de Smart Marketer',
+      parentLink: 'Fait partie de iVISION Agency',
       copyright: '© 2026 iVision Ads. Tous droits réservés.',
       privacy: 'Politique de Confidentialité',
       terms: 'Conditions Générales',

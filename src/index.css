@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-dark: #05050a;
-  --color-brand-navy: #0a0a16;
-  --color-brand-neon-blue: #00f0ff;
-  --color-brand-neon-purple: #8a2be2;
-  --color-glass-bg: rgba(255, 255, 255, 0.03);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-brand-dark: #050A15;
+  --color-brand-navy: #0A1122;
+  --color-brand-neon-blue: #0052FF;
+  --color-brand-neon-purple: #0088FF;
+  --color-glass-bg: rgba(255, 255, 255, 0.02);
+  --color-glass-border: rgba(255, 255, 255, 0.05);
   
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   body {
-    @apply bg-brand-dark text-white font-sans antialiased overflow-x-hidden;
+    @apply bg-brand-dark text-white font-sans antialiased overflow-x-hidden selection:bg-brand-neon-blue selection:text-white;
   }
 }
 
 @layer utilities {
   .glass-card {
-    @apply bg-glass-bg backdrop-blur-xl border border-glass-border rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    @apply bg-glass-bg backdrop-blur-2xl border border-glass-border rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.5)];
   }
   
   .text-gradient {
@@ -31,6 +31,6 @@
   }
   
   .glow-orb {
-    @apply absolute rounded-full mix-blend-screen filter blur-[100px] opacity-30 pointer-events-none;
+    @apply absolute rounded-full mix-blend-screen filter blur-[120px] opacity-20 pointer-events-none;
   }
 }

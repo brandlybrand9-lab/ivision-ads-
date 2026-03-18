@@ -35,28 +35,28 @@ export const Portfolio = () => {
       </div>
 
       {/* Case Studies */}
-      <section className="mb-32">
-        <div className="flex items-center gap-4 mb-12">
-          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-blue to-transparent flex-grow opacity-50" />
-          <h2 className="text-3xl md:text-4xl font-bold px-4">{t('portfolio.caseStudies.title')}</h2>
-          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-blue to-transparent flex-grow opacity-50" />
+      <section className="mb-40">
+        <div className="flex items-center gap-6 mb-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-blue to-transparent flex-grow opacity-30" />
+          <h2 className="text-3xl md:text-5xl font-black px-4 tracking-tight">{t('portfolio.caseStudies.title')}</h2>
+          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-blue to-transparent flex-grow opacity-30" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {caseStudies.map((study, index) => {
             const Icon = study.icon;
             return (
-              <GlassCard key={study.id} delay={index * 0.1} className="relative overflow-hidden group">
-                <div className={`absolute top-0 right-0 w-32 h-32 ${study.bg} blur-[50px] rounded-full -mr-10 -mt-10 transition-transform group-hover:scale-150`} />
+              <GlassCard key={study.id} delay={index * 0.1} className="relative overflow-hidden group hover:-translate-y-2 transition-all duration-500">
+                <div className={`absolute top-0 right-0 w-48 h-48 ${study.bg} blur-[60px] rounded-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-150 opacity-50`} />
                 <div className="relative z-10">
-                  <div className={`w-14 h-14 rounded-xl ${study.bg} flex items-center justify-center mb-6`}>
-                    <Icon className={`w-7 h-7 ${study.color}`} />
+                  <div className={`w-16 h-16 rounded-2xl ${study.bg} flex items-center justify-center mb-8 shadow-lg`}>
+                    <Icon className={`w-8 h-8 ${study.color}`} />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">{t(`portfolio.caseStudies.${study.id}.title`)}</h3>
-                  <div className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-neon-blue font-semibold mb-6">
+                  <h3 className="text-2xl font-bold mb-3">{t(`portfolio.caseStudies.${study.id}.title`)}</h3>
+                  <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-neon-blue font-bold mb-6 shadow-inner">
                     {t(`portfolio.caseStudies.${study.id}.metric`)}
                   </div>
-                  <p className="text-gray-400 leading-relaxed">
+                  <p className="text-gray-400 leading-relaxed font-light">
                     {t(`portfolio.caseStudies.${study.id}.desc`)}
                   </p>
                 </div>
@@ -68,28 +68,29 @@ export const Portfolio = () => {
 
       {/* Testimonials */}
       <section>
-        <div className="flex items-center gap-4 mb-12">
-          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-purple to-transparent flex-grow opacity-50" />
-          <h2 className="text-3xl md:text-4xl font-bold px-4">{t('portfolio.testimonials.title')}</h2>
-          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-purple to-transparent flex-grow opacity-50" />
+        <div className="flex items-center gap-6 mb-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-purple to-transparent flex-grow opacity-30" />
+          <h2 className="text-3xl md:text-5xl font-black px-4 tracking-tight">{t('portfolio.testimonials.title')}</h2>
+          <div className="h-px bg-gradient-to-r from-transparent via-brand-neon-purple to-transparent flex-grow opacity-30" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((test, index) => (
-            <GlassCard key={test} delay={index * 0.1} className="flex flex-col">
-              <Quote className="w-10 h-10 text-brand-neon-purple/40 mb-6" />
-              <p className="text-lg text-gray-300 leading-relaxed mb-8 flex-grow italic">
+            <GlassCard key={test} delay={index * 0.1} className="flex flex-col relative group hover:-translate-y-2 transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-neon-purple/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+              <Quote className="w-12 h-12 text-brand-neon-purple/30 mb-8 relative z-10" />
+              <p className="text-lg text-gray-300 leading-relaxed mb-10 flex-grow italic font-light relative z-10">
                 "{t(`portfolio.testimonials.${test}.quote`)}"
               </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-neon-blue to-brand-neon-purple p-0.5">
-                  <div className="w-full h-full rounded-full bg-brand-dark flex items-center justify-center text-lg font-bold">
+              <div className="flex items-center gap-5 relative z-10">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-brand-neon-blue to-brand-neon-purple p-[2px] shadow-lg">
+                  <div className="w-full h-full rounded-full bg-brand-navy flex items-center justify-center text-xl font-bold">
                     {t(`portfolio.testimonials.${test}.name`).charAt(0)}
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-white">{t(`portfolio.testimonials.${test}.name`)}</h4>
-                  <p className="text-sm text-gray-500">{t(`portfolio.testimonials.${test}.role`)}</p>
+                  <h4 className="font-bold text-white text-lg">{t(`portfolio.testimonials.${test}.name`)}</h4>
+                  <p className="text-sm text-brand-neon-blue/80 font-medium">{t(`portfolio.testimonials.${test}.role`)}</p>
                 </div>
               </div>
             </GlassCard>

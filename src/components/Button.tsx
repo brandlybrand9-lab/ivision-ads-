@@ -17,9 +17,9 @@ export const Button = ({ variant = 'primary', size = 'md', className, children, 
   const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 active:scale-95";
   
   const variants = {
-    primary: "bg-gradient-primary text-white shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_30px_rgba(138,43,226,0.5)]",
-    secondary: "bg-white text-brand-dark hover:bg-gray-100",
-    glass: "glass-card hover:bg-white/10 text-white",
+    primary: "bg-gradient-primary text-white shadow-[0_0_20px_rgba(0,82,255,0.3)] hover:shadow-[0_0_30px_rgba(0,136,255,0.5)] hover:-translate-y-0.5",
+    secondary: "bg-white text-brand-dark hover:bg-gray-100 hover:-translate-y-0.5",
+    glass: "bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 text-white hover:border-white/20 hover:-translate-y-0.5",
   };
   
   const sizes = {

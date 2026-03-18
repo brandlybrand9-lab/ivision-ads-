@@ -35,16 +35,19 @@ export const Services = () => {
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
         {servicesList.map((service, index) => {
           const Icon = service.icon;
           return (
-            <GlassCard key={service.id} delay={index * 0.1} className="group hover:-translate-y-2 transition-transform duration-300">
-              <div className={`w-16 h-16 rounded-2xl ${service.bg} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}>
-                <Icon className={`w-8 h-8 ${service.color}`} />
+            <GlassCard key={service.id} delay={index * 0.1} className="group hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
+              <div className={`absolute top-0 right-0 w-48 h-48 ${service.bg} blur-[60px] rounded-full -mr-10 -mt-10 transition-transform duration-700 group-hover:scale-150 opacity-30`} />
+              <div className="relative z-10">
+                <div className={`w-16 h-16 rounded-2xl ${service.bg} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
+                  <Icon className={`w-8 h-8 ${service.color}`} />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">{t(`services.list.${service.id}`)}</h3>
+                <div className="w-12 h-1 bg-white/10 rounded-full group-hover:bg-brand-neon-blue group-hover:w-24 transition-all duration-500" />
               </div>
-              <h3 className="text-2xl font-bold mb-4">{t(`services.list.${service.id}`)}</h3>
-              <div className="w-12 h-1 bg-white/10 rounded-full group-hover:bg-brand-neon-blue transition-colors" />
             </GlassCard>
           );
         })}
@@ -55,24 +58,30 @@ export const Services = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative rounded-3xl overflow-hidden p-10 md:p-16 border border-brand-neon-purple/30 bg-gradient-to-r from-brand-navy to-brand-neon-purple/10"
+        className="relative rounded-[2.5rem] overflow-hidden p-10 md:p-16 border border-white/10 bg-brand-navy shadow-2xl"
       >
-        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-neon-purple/20 blur-[100px] rounded-full" />
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-neon-blue/10 via-transparent to-brand-neon-purple/10" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-neon-purple/20 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-neon-blue/20 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('services.parentCompany.title')}</h2>
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-brand-neon-purple mb-6">
+              Official Partner
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">{t('services.parentCompany.title')}</h2>
+            <p className="text-xl text-gray-300 leading-relaxed font-light">
               {t('services.parentCompany.desc')}
             </p>
           </div>
           <a 
-            href="https://smartmarketer.com" 
+            href="https://ivision.agency" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-brand-dark font-bold hover:bg-gray-200 transition-colors"
+            className="shrink-0 inline-flex items-center justify-center gap-3 px-10 py-5 rounded-full bg-white text-brand-dark font-bold hover:bg-gray-100 transition-all hover:scale-105 shadow-xl shadow-white/10 text-lg"
           >
             {t('services.parentCompany.link')}
-            {dir === 'rtl' ? <ArrowRight className="rotate-180 w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
+            {dir === 'rtl' ? <ArrowRight className="rotate-180 w-6 h-6" /> : <ArrowRight className="w-6 h-6" />}
           </a>
         </div>
       </motion.div>

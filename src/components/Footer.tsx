@@ -6,8 +6,9 @@ export const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-brand-navy border-t border-white/5 pt-20 pb-10 mt-20">
-      <div className="container mx-auto px-4 md:px-8">
+    <footer className="bg-brand-dark border-t border-white/5 pt-24 pb-12 mt-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-neon-blue/5 pointer-events-none" />
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2">
@@ -65,7 +66,7 @@ export const Footer = () => {
             <p className="text-gray-400 text-sm mb-4">
               {t('footer.parentLink')}
             </p>
-            <a href="https://smartmarketer.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-brand-neon-blue hover:text-brand-neon-purple transition-colors text-sm font-medium">
+            <a href="https://ivision.agency" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-brand-neon-blue hover:text-brand-neon-purple transition-colors text-sm font-medium">
               {t('services.parentCompany.link')} &rarr;
             </a>
           </div>
