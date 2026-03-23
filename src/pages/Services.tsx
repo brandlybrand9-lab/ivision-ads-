@@ -1,18 +1,18 @@
 import { useLanguage } from '../i18n/context';
 import { GlassCard } from '../components/GlassCard';
-import { Search, Youtube, Target, Key, PlaySquare, Users, ArrowRight } from 'lucide-react';
+import { Search, Target, Video, Magnet, TrendingUp, Share2, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export const Services = () => {
   const { t, dir } = useLanguage();
 
   const servicesList = [
-    { id: 'search', icon: Search, color: 'text-blue-400', bg: 'bg-blue-500/20' },
-    { id: 'youtube', icon: Youtube, color: 'text-red-400', bg: 'bg-red-500/20' },
-    { id: 'remarketing', icon: Target, color: 'text-purple-400', bg: 'bg-purple-500/20' },
-    { id: 'keyword', icon: Key, color: 'text-green-400', bg: 'bg-green-500/20' },
-    { id: 'interactive', icon: PlaySquare, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
-    { id: 'genz', icon: Users, color: 'text-pink-400', bg: 'bg-pink-500/20' },
+    { id: 'meta', icon: Share2, color: 'text-blue-400', bg: 'bg-blue-500/20' },
+    { id: 'google', icon: Search, color: 'text-red-400', bg: 'bg-red-500/20' },
+    { id: 'tiktok', icon: Video, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+    { id: 'retargeting', icon: Target, color: 'text-purple-400', bg: 'bg-purple-500/20' },
+    { id: 'leadGen', icon: Magnet, color: 'text-green-400', bg: 'bg-green-500/20' },
+    { id: 'optimization', icon: TrendingUp, color: 'text-pink-400', bg: 'bg-pink-500/20' },
   ];
 
   return (

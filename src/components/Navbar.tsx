@@ -5,6 +5,8 @@ import { useLanguage, Language } from '../i18n/context';
 import { Button } from './Button';
 import { motion, AnimatePresence } from 'motion/react';
 
+import { Logo } from './Logo';
+
 export const Navbar = () => {
   const { t, lang, setLang, dir } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +35,6 @@ export const Navbar = () => {
   const navLinks = [
     { name: t('nav.home'), path: '/' },
     { name: t('nav.services'), path: '/services' },
-    { name: t('nav.portfolio'), path: '/portfolio' },
     { name: t('nav.contact'), path: '/contact' },
   ];
 
@@ -44,11 +45,8 @@ export const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 z-50">
-          <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center">
-            <span className="text-white font-bold text-xl">iV</span>
-          </div>
-          <span className="text-xl font-bold tracking-tight">iVision<span className="text-brand-neon-blue">Ads</span></span>
+        <Link to="/" className="flex items-center z-50">
+          <Logo className="h-12 w-auto" />
         </Link>
 
         {/* Desktop Nav */}

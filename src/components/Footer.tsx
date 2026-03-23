@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/context';
 import { Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Logo } from './Logo';
 
 export const Footer = () => {
   const { t } = useLanguage();
@@ -11,11 +12,8 @@ export const Footer = () => {
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center">
-                <span className="text-white font-bold text-xl">iV</span>
-              </div>
-              <span className="text-xl font-bold tracking-tight">iVision<span className="text-brand-neon-blue">Ads</span></span>
+            <Link to="/" className="flex items-center">
+              <Logo className="h-12 w-auto" />
             </Link>
             <p className="text-gray-400 leading-relaxed text-sm">
               {t('footer.desc')}
@@ -36,10 +34,10 @@ export const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">{t('nav.services')}</h4>
             <ul className="space-y-4">
-              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.search')}</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.youtube')}</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.remarketing')}</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.interactive')}</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.meta')}</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.google')}</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.tiktok')}</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-brand-neon-blue transition-colors text-sm">{t('services.list.retargeting')}</Link></li>
             </ul>
           </div>
 
