@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { Services } from './pages/Services';
 import { Portfolio } from './pages/Portfolio';
 import { Contact } from './pages/Contact';
+import WhatsAppButton from './components/WhatsAppButton';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Layout>
+        <WhatsAppButton />
       </Router>
     </LanguageProvider>
   );

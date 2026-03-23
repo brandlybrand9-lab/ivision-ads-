@@ -64,15 +64,14 @@ export const Contact = () => {
       setIsSubmitting(true);
       
       try {
+        // @ts-ignore - Vite env variables
         const webhookUrl = import.meta.env.VITE_WEBHOOK_URL || 'https://hooks.zapier.com/hooks/catch/26935933/upc3ejs/';
         
         if (webhookUrl) {
           // Send data to the configured webhook (Zapier, Make, etc.)
           await fetch(webhookUrl, {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            mode: 'no-cors', // Prevent CORS errors when calling Zapier from browser
             body: JSON.stringify({
               name: formData.name,
               phone: formData.phone,
