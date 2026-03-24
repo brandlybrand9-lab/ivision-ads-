@@ -192,16 +192,7 @@ export const Contact = () => {
             </div>
           </GlassCard>
 
-          <div className="flex items-center gap-4 pt-4">
-            <a href="#" className="flex-1 glass-card py-4 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors text-green-400">
-              <MessageSquare className="w-5 h-5" />
-              <span className="font-medium">WhatsApp</span>
-            </a>
-            <a href="#" className="flex-1 glass-card py-4 flex items-center justify-center gap-2 hover:bg-white/5 transition-colors text-blue-400">
-              <Send className="w-5 h-5" />
-              <span className="font-medium">Telegram</span>
-            </a>
-          </div>
+
         </div>
 
         {/* Lead Gen Form */}
