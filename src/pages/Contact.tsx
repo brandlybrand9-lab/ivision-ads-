@@ -64,12 +64,34 @@ export const Contact = () => {
       setIsSubmitting(true);
       
       try {
-        const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+        // Using the provided Web3Forms access key
+        const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '2627e590-a919-462c-9f89-fcc49111b822';
+        const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
         
-        if (!accessKey) {
-          console.warn('Web3Forms access key is missing. Simulating submission.');
-          await new Promise(resolve => setTimeout(resolve, 1500));
-        } else {
+        const payload = {
+          name: formData.name,
+          phone: formData.phone,
+          service: formData.service,
+          budget: formData.budget,
+          message: formData.message || 'No message provided',
+          source: 'iVision Ads Website'
+        };
+
+        if (webhookUrl) {
+          // Send to Zapier, Make.com, or custom webhook
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to submit to webhook');
+          }
+        } else if (accessKey) {
+          // Send to Web3Forms (Email)
           const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             headers: {
@@ -80,11 +102,7 @@ export const Contact = () => {
               access_key: accessKey,
               subject: 'New Lead from iVision Ads Website',
               from_name: 'iVision Ads Contact Form',
-              name: formData.name,
-              phone: formData.phone,
-              service: formData.service,
-              budget: formData.budget,
-              message: formData.message || 'No message provided',
+              ...payload
             })
           });
           
@@ -92,6 +110,9 @@ export const Contact = () => {
           if (!result.success) {
             throw new Error(result.message || 'Failed to submit form');
           }
+        } else {
+          console.warn('No Webhook URL or Web3Forms key provided. Simulating submission.');
+          await new Promise(resolve => setTimeout(resolve, 1500));
         }
         
         setIsSubmitting(false);
