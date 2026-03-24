@@ -64,27 +64,34 @@ export const Contact = () => {
       setIsSubmitting(true);
       
       try {
-        // @ts-ignore - Vite env variables
-        const webhookUrl = import.meta.env.VITE_WEBHOOK_URL || 'https://hooks.zapier.com/hooks/catch/26935933/upc3ejs/';
+        const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
         
-        if (webhookUrl) {
-          // Send data to the configured webhook (Zapier, Make, etc.)
-          await fetch(webhookUrl, {
+        if (!accessKey) {
+          console.warn('Web3Forms access key is missing. Simulating submission.');
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        } else {
+          const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            mode: 'no-cors', // Prevent CORS errors when calling Zapier from browser
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
             body: JSON.stringify({
+              access_key: accessKey,
+              subject: 'New Lead from iVision Ads Website',
+              from_name: 'iVision Ads Contact Form',
               name: formData.name,
               phone: formData.phone,
               service: formData.service,
               budget: formData.budget,
-              message: formData.message,
-              source: 'iVision Ads Website',
-              timestamp: new Date().toISOString()
-            }),
+              message: formData.message || 'No message provided',
+            })
           });
-        } else {
-          // Fallback simulation if no webhook is configured
-          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          const result = await response.json();
+          if (!result.success) {
+            throw new Error(result.message || 'Failed to submit form');
+          }
         }
         
         setIsSubmitting(false);
@@ -150,7 +157,7 @@ export const Contact = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold mb-2">{t('contact.info.phone')}</h3>
-              <p className="text-gray-400 leading-relaxed" dir="ltr">+966 50 123 4567</p>
+              <p className="text-gray-400 leading-relaxed" dir="ltr">+213 798 18 47 27</p>
             </div>
           </GlassCard>
 
@@ -160,7 +167,7 @@ export const Contact = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold mb-2">{t('contact.info.email')}</h3>
-              <p className="text-gray-400 leading-relaxed">hello@ivisionads.com</p>
+              <p className="text-gray-400 leading-relaxed">ivisionads16@gmail.com</p>
             </div>
           </GlassCard>
 

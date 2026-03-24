@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Globe, Menu, X } from 'lucide-react';
+import { Globe, Menu, X, Moon, Sun } from 'lucide-react';
 import { useLanguage, Language } from '../i18n/context';
+import { useTheme } from './ThemeProvider';
 import { Button } from './Button';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -9,9 +10,15 @@ import { Logo } from './Logo';
 
 export const Navbar = () => {
   const { t, lang, setLang, dir } = useLanguage();
+  const { theme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches));
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +39,10 @@ export const Navbar = () => {
     setLang(langs[nextIndex]);
   };
 
+  const toggleTheme = () => {
+    setTheme(isDark ? 'light' : 'dark');
+  };
+
   const navLinks = [
     { name: t('nav.home'), path: '/' },
     { name: t('nav.services'), path: '/services' },
@@ -41,7 +52,7 @@ export const Navbar = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'bg-brand-dark/60 backdrop-blur-2xl border-b border-white/5 py-4 shadow-2xl shadow-black/50' : 'bg-transparent py-6'
+        isScrolled ? 'bg-brand-dark/60 backdrop-blur-2xl border-b border-white/5 py-4 shadow-2xl shadow-black/10 dark:shadow-black/50' : 'bg-transparent py-6'
       }`}
     >
       <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
@@ -66,6 +77,12 @@ export const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-4">
           <button 
+            onClick={toggleTheme}
+            className="flex items-center justify-center w-8 h-8 rounded-full text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+          >
+            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+          <button 
             onClick={toggleLanguage}
             className="flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
           >
@@ -80,12 +97,20 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden z-50 text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X /> : <Menu />}
-        </button>
+        <div className="md:hidden flex items-center gap-4 z-50">
+          <button 
+            onClick={toggleTheme}
+            className="text-white"
+          >
+            {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+          <button 
+            className="text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
 
         {/* Mobile Nav */}
         <AnimatePresence>

@@ -17,7 +17,7 @@ export const translations = {
       },
       stats: {
         roi: '+200% عائد على الاستثمار',
-        campaigns: '+50 حملة إعلانية',
+        campaigns: '+200 حملة إعلانية',
         support: 'دعم فني 24/7',
       },
       servicesPreview: {
@@ -111,7 +111,7 @@ export const translations = {
         email: 'البريد الإلكتروني',
         phone: 'رقم الهاتف',
         location: 'الموقع',
-        address: 'الرياض، حي الملقا',
+        address: 'الجزائر، الجزائر العاصمة',
       },
       form: {
         name: 'الاسم الكامل',
@@ -170,7 +170,7 @@ export const translations = {
       },
       stats: {
         roi: '+200% Return on Investment',
-        campaigns: '+50 Ad Campaigns',
+        campaigns: '+200 Ad Campaigns',
         support: '24/7 Tech Support',
       },
       servicesPreview: {
@@ -264,7 +264,7 @@ export const translations = {
         email: 'Email',
         phone: 'Phone',
         location: 'Location',
-        address: 'Riyadh, Al-Malqa District',
+        address: 'Algeria, Algiers',
       },
       form: {
         name: 'Full Name',
@@ -323,7 +323,7 @@ export const translations = {
       },
       stats: {
         roi: '+200% Retour sur Investissement',
-        campaigns: '+50 Campagnes Publicitaires',
+        campaigns: '+200 Campagnes Publicitaires',
         support: 'Support Technique 24/7',
       },
       servicesPreview: {
@@ -417,7 +417,7 @@ export const translations = {
         email: 'Email',
         phone: 'Téléphone',
         location: 'Emplacement',
-        address: 'Riyadh, Quartier Al-Malqa',
+        address: 'Algérie, Alger',
       },
       form: {
         name: 'Nom Complet',
