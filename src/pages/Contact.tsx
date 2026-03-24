@@ -71,8 +71,8 @@ export const Contact = () => {
         const payload = {
           name: formData.name,
           phone: formData.phone,
-          service: formData.service,
-          budget: formData.budget,
+          service: t(`contact.form.services.${formData.service}`) || formData.service,
+          budget: t(`contact.form.budgets.${formData.budget}`) || formData.budget,
           message: formData.message || 'No message provided',
           source: 'iVision Ads Website'
         };
