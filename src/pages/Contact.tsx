@@ -118,6 +118,15 @@ export const Contact = () => {
         setIsSubmitting(false);
         setIsSuccess(true);
         
+        // Track Facebook Pixel Lead Event
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Lead', {
+            content_name: 'Contact Form Submission',
+            service: formData.service,
+            budget: formData.budget
+          });
+        }
+        
         // Reset form after 5 seconds
         setTimeout(() => {
           setIsSuccess(false);

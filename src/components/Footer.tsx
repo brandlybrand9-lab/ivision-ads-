@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/context';
-import { Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
 import { Logo } from './Logo';
 
 export const Footer = () => {
@@ -19,14 +19,11 @@ export const Footer = () => {
               {t('footer.desc')}
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
+              <a href="https://www.instagram.com/adsivision/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
+              <a href="https://web.facebook.com/ivision.ads16/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
                 <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
-                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
