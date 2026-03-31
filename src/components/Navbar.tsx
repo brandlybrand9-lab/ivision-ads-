@@ -78,12 +78,14 @@ export const Navbar = () => {
         <div className="hidden md:flex items-center gap-4">
           <button 
             onClick={toggleTheme}
+            aria-label="Toggle theme"
             className="flex items-center justify-center w-8 h-8 rounded-full text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
           >
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <button 
             onClick={toggleLanguage}
+            aria-label="Change language"
             className="flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
           >
             <Globe className="w-4 h-4" />
@@ -100,12 +102,14 @@ export const Navbar = () => {
         <div className="md:hidden flex items-center gap-4 z-50">
           <button 
             onClick={toggleTheme}
+            aria-label="Toggle theme"
             className="text-white"
           >
             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <button 
             className="text-white"
+            aria-label="Toggle menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}

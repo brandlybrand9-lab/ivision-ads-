@@ -28,8 +28,8 @@ export const Contact = () => {
       else if (value.trim().length < 2) error = t('contact.form.validation.nameLength') || 'Name must be at least 2 characters';
     }
     if (name === 'phone') {
-      if (!value.trim()) error = t('contact.form.validation.phoneRequired') || 'Phone number is required';
-      else if (!/^[0-9+\-\s()]{8,20}$/.test(value)) error = t('contact.form.validation.phoneInvalid') || 'Please enter a valid phone number';
+      if (!value.trim()) error = t('contact.form.validation.phoneRequired') || 'WhatsApp number is required';
+      else if (!/^[0-9+\-\s()]{8,20}$/.test(value)) error = t('contact.form.validation.phoneInvalid') || 'Please enter a valid WhatsApp number';
     }
     return error;
   };
@@ -65,8 +65,8 @@ export const Contact = () => {
       
       try {
         // Using the provided Web3Forms access key
-        const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '2627e590-a919-462c-9f89-fcc49111b822';
-        const webhookUrl = import.meta.env.VITE_WEBHOOK_URL;
+        const accessKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY || '2627e590-a919-462c-9f89-fcc49111b822';
+        const webhookUrl = (import.meta as any).env.VITE_WEBHOOK_URL;
         
         const payload = {
           name: formData.name,

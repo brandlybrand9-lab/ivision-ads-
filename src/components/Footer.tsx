@@ -69,9 +69,11 @@ export const Footer = () => {
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">{t('footer.copyright')}</p>
-          <div className="flex items-center gap-6">
-            <Link to="#" className="text-gray-500 hover:text-white transition-colors text-sm">{t('footer.privacy')}</Link>
-            <Link to="#" className="text-gray-500 hover:text-white transition-colors text-sm">{t('footer.terms')}</Link>
+          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+            <Link to="/faq" className="text-gray-500 hover:text-white transition-colors text-sm">{t('footer.faq')}</Link>
+            <Link to="/cookies" className="text-gray-500 hover:text-white transition-colors text-sm">{t('footer.cookies')}</Link>
+            <Link to="/privacy" className="text-gray-500 hover:text-white transition-colors text-sm">{t('footer.privacy')}</Link>
+            <Link to="/terms" className="text-gray-500 hover:text-white transition-colors text-sm">{t('footer.terms')}</Link>
           </div>
         </div>
       </div>
