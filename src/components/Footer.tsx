@@ -19,7 +19,7 @@ export const Footer = () => {
               {t('footer.desc')}
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://www.instagram.com/ivision_ads/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
+              <a href="https://www.instagram.com/_ivisionads/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
                 <Instagram className="w-5 h-5" />
               </a>
               <a href="https://web.facebook.com/Ivisionadss" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
