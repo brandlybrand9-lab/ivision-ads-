@@ -22,7 +22,7 @@ export const Footer = () => {
               <a href="https://www.instagram.com/ivisionads__" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://web.facebook.com/ivisionforad" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
+              <a href="https://web.facebook.com/ivisionforads" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-neon-blue hover:text-brand-dark transition-all">
                 <Facebook className="w-5 h-5" />
               </a>
             </div>
