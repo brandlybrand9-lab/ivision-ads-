@@ -127,12 +127,12 @@ export const Contact = () => {
           });
         }
         
-        // Reset form after 5 seconds
+        // Reset form after 15 seconds to give time to click WhatsApp
         setTimeout(() => {
           setIsSuccess(false);
           setFormData({ name: '', phone: '', service: 'ecommerce', budget: 'b1', message: '' });
           setTouched({});
-        }, 5000);
+        }, 15000);
       } catch (error) {
         console.error('Error submitting form:', error);
         setIsSubmitting(false);
@@ -143,7 +143,7 @@ export const Contact = () => {
           setIsSuccess(false);
           setFormData({ name: '', phone: '', service: 'ecommerce', budget: 'b1', message: '' });
           setTouched({});
-        }, 5000);
+        }, 15000);
       }
     }
   };
@@ -216,12 +216,26 @@ export const Contact = () => {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="flex flex-col items-center justify-center py-12 text-center space-y-4"
+                  className="flex flex-col items-center justify-center py-12 text-center space-y-6"
                 >
-                  <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
+                  <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-2">
                     <CheckCircle2 className="w-10 h-10 text-green-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">{t('contact.form.success')}</h3>
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-bold text-white">{t('contact.form.success')}</h3>
+                    <p className="text-gray-400 max-w-md mx-auto">
+                      Pour une réponse immédiate, n'hésitez pas à nous contacter directement sur WhatsApp !
+                    </p>
+                  </div>
+                  <a 
+                    href="https://wa.me/213798184727?text=Bonjour%20iVision%20Ads%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20vos%20services%20de%20sponsoring%20et%20j%27aimerais%20en%20savoir%20plus%20sur%20vos%20offres.%20Merci%20de%20me%20recontacter."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-[#25D366]/20"
+                  >
+                    <MessageSquare className="w-5 h-5" />
+                    Continuer sur WhatsApp
+                  </a>
                 </motion.div>
               ) : (
                 <motion.div

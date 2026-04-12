@@ -3,7 +3,7 @@ import React from 'react';
 export default function WhatsAppButton() {
   // We will replace this with your actual number!
   const phoneNumber = "213798184727"; 
-  const message = "Hello! I'm interested in your marketing services.";
+  const message = "Bonjour iVision Ads ! Je suis intéressé(e) par vos services publicitaires et j'aimerais explorer des opportunités de sponsoring. Merci de me recontacter !";
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
