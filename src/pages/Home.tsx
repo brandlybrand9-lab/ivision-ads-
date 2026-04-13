@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/context';
 import { Button } from '../components/Button';
 import { GlassCard } from '../components/GlassCard';
+import { Testimonials } from '../components/Testimonials';
 import { TrendingUp, Target, Headset, BarChart3, Search, PlayCircle, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -162,6 +163,9 @@ export const Home = () => {
           ))}
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* Bottom CTA */}
       <section className="container mx-auto px-4 md:px-8">
