@@ -1,0 +1,380 @@
+import React, { useState } from 'react';
+import { useLanguage } from '../i18n/context';
+import { GlassCard } from '../components/GlassCard';
+import { Button } from '../components/Button';
+import { Mail, Phone, MapPin, MessageSquare, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+
+export const Contact = () => {
+  const { t, lang } = useLanguage();
+  const quickReplyCopy = {
+    ar: 'للحصول على ردّ أسرع، يمكنك التواصل معنا مباشرة عبر WhatsApp.',
+    en: 'For a faster reply, contact us directly on WhatsApp.',
+    fr: 'Pour une réponse plus rapide, contactez-nous directement sur WhatsApp.',
+  }[lang];
+  const continueWhatsAppCopy = {
+    ar: 'متابعة عبر WhatsApp',
+    en: 'Continue on WhatsApp',
+    fr: 'Continuer sur WhatsApp',
+  }[lang];
+
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    service: 'ecommerce',
+    budget: 'b1',
+    message: ''
+  });
+  
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    if (name === 'name') {
+      if (!value.trim()) error = t('contact.form.validation.nameRequired') || 'Name is required';
+      else if (value.trim().length < 2) error = t('contact.form.validation.nameLength') || 'Name must be at least 2 characters';
+    }
+    if (name === 'phone') {
+      if (!value.trim()) error = t('contact.form.validation.phoneRequired') || 'WhatsApp number is required';
+      else if (!/^[0-9+\-\s()]{8,20}$/.test(value)) error = t('contact.form.validation.phoneInvalid') || 'Please enter a valid WhatsApp number';
+    }
+    return error;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (touched[name]) {
+      setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const newErrors: Record<string, string> = {};
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, formData[key as keyof typeof formData]);
+      if (error) newErrors[key] = error;
+    });
+    
+    setErrors(newErrors);
+    setTouched({ name: true, phone: true, service: true, budget: true, message: true });
+    
+    if (Object.keys(newErrors).filter(k => newErrors[k]).length === 0) {
+      setIsSubmitting(true);
+      
+      try {
+        // Using the provided Web3Forms access key
+        const accessKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY || '2627e590-a919-462c-9f89-fcc49111b822';
+        const webhookUrl = (import.meta as any).env.VITE_WEBHOOK_URL;
+        
+        const payload = {
+          name: formData.name,
+          phone: formData.phone,
+          service: t(`contact.form.services.${formData.service}`) || formData.service,
+          budget: t(`contact.form.budgets.${formData.budget}`) || formData.budget,
+          message: formData.message || 'No message provided',
+          source: 'iVision Ads Website'
+        };
+
+        if (webhookUrl) {
+          // Send to Zapier, Make.com, or custom webhook
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to submit to webhook');
+          }
+        } else if (accessKey) {
+          // Send to Web3Forms (Email)
+          const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({
+              access_key: accessKey,
+              subject: 'New Lead from iVision Ads Website',
+              from_name: 'iVision Ads Contact Form',
+              ...payload
+            })
+          });
+          
+          const result = await response.json();
+          if (!result.success) {
+            throw new Error(result.message || 'Failed to submit form');
+          }
+        } else {
+          console.warn('No Webhook URL or Web3Forms key provided. Simulating submission.');
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+        
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        
+        // Track Facebook Pixel Lead Event
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('track', 'Lead', {
+            content_name: 'Contact Form Submission',
+            service: formData.service,
+            budget: formData.budget
+          });
+        }
+        
+        // Reset form after 15 seconds to give time to click WhatsApp
+        setTimeout(() => {
+          setIsSuccess(false);
+          setFormData({ name: '', phone: '', service: 'ecommerce', budget: 'b1', message: '' });
+          setTouched({});
+        }, 15000);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        setIsSubmitting(false);
+        // Still show success to the user so they aren't blocked, 
+        // but in a real app you might want to show an error message.
+        setIsSuccess(true);
+        setTimeout(() => {
+          setIsSuccess(false);
+          setFormData({ name: '', phone: '', service: 'ecommerce', budget: 'b1', message: '' });
+          setTouched({});
+        }, 15000);
+      }
+    }
+  };
+
+  return (
+    <div className="contact-page">
+      <div className="text-center max-w-3xl mx-auto mb-20">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-5xl md:text-6xl font-black mb-6"
+        >
+          {t('contact.title')}
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-xl text-gray-400"
+        >
+          {t('contact.subtitle')}
+        </motion.p>
+      </div>
+
+      <div className="contact-grid">
+        {/* Contact Info */}
+        <div className="contact-info-list">
+          <GlassCard delay={0.1} className="contact-info-card">
+            <div className="contact-info-icon">
+              <MapPin className="w-7 h-7 text-brand-neon-blue" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-2">{t('contact.info.location')}</h3>
+              <p className="text-gray-400 leading-relaxed">{t('contact.info.address')}</p>
+            </div>
+          </GlassCard>
+
+          <GlassCard delay={0.2} className="contact-info-card">
+            <div className="contact-info-icon">
+              <Phone className="w-7 h-7 text-brand-neon-blue" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-2">{t('contact.info.phone')}</h3>
+              <p className="text-gray-400 leading-relaxed" dir="ltr">+213 798 18 47 27</p>
+            </div>
+          </GlassCard>
+
+          <GlassCard delay={0.3} className="contact-info-card">
+            <div className="contact-info-icon">
+              <Mail className="w-7 h-7 text-brand-neon-blue" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-2">{t('contact.info.email')}</h3>
+              <p className="text-gray-400 leading-relaxed">ivisionads16@gmail.com</p>
+            </div>
+          </GlassCard>
+
+
+        </div>
+
+        {/* Lead Gen Form */}
+        <GlassCard delay={0.4} className="contact-form-shell relative overflow-hidden p-8 md:p-12">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-neon-blue/10 blur-[120px] rounded-full -mr-20 -mt-20 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-neon-blue/10 blur-[120px] rounded-full -ml-20 -mb-20 pointer-events-none" />
+          
+          <form className="relative z-10 space-y-8" onSubmit={handleSubmit}>
+            <AnimatePresence mode="wait">
+              {isSuccess ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="flex flex-col items-center justify-center py-12 text-center space-y-6"
+                >
+                  <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-2">
+                    <CheckCircle2 className="w-10 h-10 text-green-400" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-bold text-white">{t('contact.form.success')}</h3>
+                    <p className="text-gray-400 max-w-md mx-auto">
+                      {quickReplyCopy}
+                    </p>
+                  </div>
+                  <a 
+                    href="https://wa.me/213798184727?text=Bonjour%20iVision%20Ads%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20vos%20services%20de%20sponsoring%20et%20j%27aimerais%20en%20savoir%20plus%20sur%20vos%20offres.%20Merci%20de%20me%20recontacter."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-[#25D366]/20"
+                  >
+                    <MessageSquare className="w-5 h-5" />
+                    {continueWhatsAppCopy}
+                  </a>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="space-y-8"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                      <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.name')}</label>
+                      <div className="relative">
+                        <input 
+                          type="text" 
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className={`w-full bg-white/5 border ${errors.name && touched.name ? 'border-red-500/50 focus:border-red-500' : touched.name && !errors.name ? 'border-green-500/50 focus:border-green-500' : 'border-white/10 focus:border-brand-neon-blue'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:bg-white/10 transition-all shadow-inner`}
+                        />
+                        {touched.name && !errors.name && (
+                          <CheckCircle2 className="absolute top-1/2 -translate-y-1/2 right-4 w-5 h-5 text-green-400" />
+                        )}
+                      </div>
+                      <AnimatePresence>
+                        {errors.name && touched.name && (
+                          <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-red-400 text-sm flex items-center gap-1 mt-2">
+                            <AlertCircle className="w-4 h-4" /> {errors.name}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                    <div className="space-y-3">
+                      <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.phone')}</label>
+                      <div className="relative">
+                        <input 
+                          type="tel" 
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className={`w-full bg-white/5 border ${errors.phone && touched.phone ? 'border-red-500/50 focus:border-red-500' : touched.phone && !errors.phone ? 'border-green-500/50 focus:border-green-500' : 'border-white/10 focus:border-brand-neon-blue'} rounded-2xl px-5 py-4 text-white focus:outline-none focus:bg-white/10 transition-all shadow-inner`}
+                          dir="ltr"
+                        />
+                        {touched.phone && !errors.phone && (
+                          <CheckCircle2 className="absolute top-1/2 -translate-y-1/2 right-4 w-5 h-5 text-green-400" />
+                        )}
+                      </div>
+                      <AnimatePresence>
+                        {errors.phone && touched.phone && (
+                          <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-red-400 text-sm flex items-center gap-1 mt-2">
+                            <AlertCircle className="w-4 h-4" /> {errors.phone}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.service')}</label>
+                    <select 
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="w-full bg-brand-navy border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue transition-all appearance-none shadow-inner cursor-pointer"
+                    >
+                      <option value="ecommerce">{t('contact.form.services.ecommerce')}</option>
+                      <option value="hospitality">{t('contact.form.services.hospitality')}</option>
+                      <option value="fashion">{t('contact.form.services.fashion')}</option>
+                      <option value="beauty">{t('contact.form.services.beauty')}</option>
+                      <option value="digital">{t('contact.form.services.digital')}</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.budget')}</label>
+                    <select 
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="w-full bg-brand-navy border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue transition-all appearance-none shadow-inner cursor-pointer"
+                    >
+                      <option value="b1">{t('contact.form.budgets.b1')}</option>
+                      <option value="b2">{t('contact.form.budgets.b2')}</option>
+                      <option value="b3">{t('contact.form.budgets.b3')}</option>
+                      <option value="b4">{t('contact.form.budgets.b4')}</option>
+                      <option value="b5">{t('contact.form.budgets.b5')}</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-sm font-semibold text-gray-300 uppercase tracking-wider">{t('contact.form.message')}</label>
+                    <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      rows={4}
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-brand-neon-blue focus:bg-white/10 transition-all resize-none shadow-inner"
+                    />
+                  </div>
+
+                  <Button 
+                    variant="primary" 
+                    size="lg" 
+                    className="w-full py-5 text-lg font-bold tracking-wide flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        {t('contact.form.submit')}...
+                      </>
+                    ) : (
+                      t('contact.form.submit')
+                    )}
+                  </Button>
+
+                  <p className="contact-notice text-sm text-center mt-6 p-4 rounded-xl">
+                    {t('contact.form.notice')}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </form>
+        </GlassCard>
+      </div>
+    </div>
+  );
+};

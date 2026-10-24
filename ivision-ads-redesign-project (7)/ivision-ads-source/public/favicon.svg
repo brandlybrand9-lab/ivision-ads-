@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#ffffff" rx="100"/>
+  
+  <!-- i -->
+  <circle cx="160" cy="180" r="40" fill="#050505"/>
+  <rect x="120" y="240" width="80" height="160" fill="#050505" rx="8"/>
+  
+  <!-- V -->
+  <path d="M210 180 L280 180 L330 400 L260 400 Z" fill="#050505"/>
+  <path d="M430 180 L360 180 L310 400 L380 400 Z" fill="#050505"/>
+  
+  <!-- Blue Triangle -->
+  <polygon points="370,180 460,130 430,220" fill="#2563eb"/>
+</svg>
